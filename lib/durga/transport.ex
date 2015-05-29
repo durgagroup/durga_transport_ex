@@ -17,7 +17,7 @@ defmodule Durga.Transport do
   for {code, name, args} <- v1_mapping do
     vars = Enum.map(args, &(Macro.var(&1, nil)))
     def encode({unquote(name), unquote_splicing(vars)}) do
-      msg = :msgpack.pack([unquote(code), unquote_splicing(vars)])
+      msg = :msgpack.pack([unquote(code), unquote_splicing(vars)], [format: :map])
       <<1, msg :: binary>>
     end
 
